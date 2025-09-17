@@ -2,7 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+}
+
 body {
-  background: #f8fafc;
-  color: #1e293b;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.card {
+  @apply bg-white rounded-card shadow-sm border border-slate-200;
+}
+
+.btn {
+  @apply px-4 py-2 rounded-md bg-primary text-white hover:bg-blue-700 transition;
 }

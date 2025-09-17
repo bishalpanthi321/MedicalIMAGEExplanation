@@ -1,0 +1,57 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.env
+.env.*
+*.sqlite3
+
+# Node modules and build output
+node_modules/
+frontend/node_modules/
+frontend/dist/
+backend/node_modules/
+backend/dist/
+
+# VS Code settings
+.vscode/
+
+# Docker volumes
+pgdata/
+
+# Logs
+*.log
+logs/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Test, coverage, and debug
+.coverage
+coverage/
+htmlcov/
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+test-results/
+
+# Misc
+*.bak
+*.swp
+*.swo
+*.tmp
+*.orig
+node_modules

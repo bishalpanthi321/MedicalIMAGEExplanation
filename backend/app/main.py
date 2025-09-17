@@ -1,10 +1,29 @@
 from fastapi import FastAPI
-from app.api import predict, patient, upload, explain, auth
+from fastapi.middleware.cors import CORSMiddleware
+from .config import settings
+from .db import Base, engine
+from .api.routes.patients import router as patients_router
+from .api.routes.upload import router as upload_router
+from .api.routes.predict import router as predict_router
+from .api.routes.reports import router as reports_router
 
-app = FastAPI(title="Explainable Medical AI Platform")
+def create_app() -> FastAPI:
+    app = FastAPI(title=settings.PROJECT_NAME)
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=settings.CORS_ORIGINS,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+    Base.metadata.create_all(bind=engine)
+    app.include_router(patients_router, prefix="/patients", tags=["patients"])
+    app.include_router(upload_router, prefix="/upload", tags=["upload"])
+    app.include_router(predict_router, tags=["predict"])
+    app.include_router(reports_router, tags=["reports"])
+    @app.get("/healthz")
+    def healthz():
+        return {"status": "ok"}
+    return app
 
-app.include_router(auth.router)
-app.include_router(upload.router)
-app.include_router(predict.router)
-app.include_router(patient.router)
-app.include_router(explain.router)
+app = create_app()
